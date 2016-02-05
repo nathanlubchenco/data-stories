@@ -1,0 +1,1 @@
+consider submission to: [young statisticians writing contest]("https://www.statslife.org.uk/significance/2019-entries-now-open-for-the-2015-young-statisticians-writing-competition?platform=hootsuite")
