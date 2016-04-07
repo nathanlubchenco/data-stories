@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Data Story Template</title>
+  <link rel="stylesheet" href="assets/css/tufte.css"/>
+  <link rel="stylesheet" href="assets/css/latex.css"/>
+  <link rel="stylesheet" href="assets/css/TangleKit.css"/>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/Tangle.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/mootools.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/BVTouchable.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/sprintf.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/TangleKit.js"></script>
+  <!-- TODO check to see if v4 is out and upgrade -->
+  <script type="text/javascript" src="assets/js/d3/d3.v3.js"></script>
+  <script type="text/javascript" src="assets/js/tangleCookie.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript">
+    // TODO move to tangleCookie.js
+    function init(){
+      console.log("loaded init");
+      var tangle = new Tangle (document.getElementById("calorieCalculator"), {
+          initialize: function () {
+              this.cookies = 3;
+              this.caloriesPerCookie = 50;
+              this.dailyCalories = 2100;
+          },
+          update: function () {
+              this.calories = this.cookies * this.caloriesPerCookie;
+              this.dailyPercent = 100 * this.calories / this.dailyCalories;
+          }
+      });
+ 
+    }
+  
+  </script>
+</head>
+
+<body id="a" onload="init();">
+  <article id="b">
+    <h1 id="tufte-css">Data Story Template</h1>
+    <p class="subtitle">Nathan Lubchenco</p>
+    <section>
+      <p>Uses <a href="http://www.daveliepmann.com">Dave Liepmann's</a> Tufte CSS, <a href "http://worrydream.com/">Bret Victor's</a> Tangle and Mike Bostok's <a href="">D3.js</a>. Aspires to be in the vein of <a href="http://explorableexplanations.com/">Explorable Explanations.</a></p>     
+      <p>If you need something less customizable, consider X's <a href="">glasseye</a> for a similar approach using markdown.</p> 
+    </section>
+
+    <section>
+      <h2 id="fundamentals">Fundamentals</h2>
+      <h3 id="fundamentals--sections-and-headers">Examples</h3>
+      <blockquote cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">
+        <p>[It is] notable that the Feynman lectures (3 volumes) write about all of physics in 1800 pages, using only 2 levels of hierarchical headings: chapters and A-level heads in the text. It also uses the methodology of <em>sentences</em> which then cumulate sequentially into <em>paragraphs</em>, rather than the grunts of bullet points. Undergraduate Caltech physics is very complicated material, but it didn’t require an elaborate hierarchy to organize.</p>
+        <footer><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000hB">Edward Tufte, forum post, ‘Book design: advice and examples’ thread</a></footer>
+      </blockquote>
+      <p><span class="newthought">In his later books<label for="sn-in-his-later-books" class="margin-toggle sidenote-number"></label></span><input type="checkbox" id="sn-in-his-later-books" class="margin-toggle"/><span class="sidenote"><a href="http://www.edwardtufte.com/tufte/books_be"><em>Beautiful Evidence</em></a></span>, Tufte starts each section with a bit of vertical space, a non-indented paragraph, and the first few words of the sentence set in small caps. For this we use a span with the class <span class="code">newthought</span>, as demonstrated at the beginning of this paragraph. Vertical spacing is accomplished separately through <span class="code">&lt;section&gt;</span> tags. Be consistent: though we do so in this paragraph for the purpose of demonstration, do not alternate use of header elements and the <span class="code">newthought</span> technique. Pick one approach and stick to it.</p>
+      <p class="sans">If you prefer sans-serifs, use the <span class="code">sans</span> class. It relies on Gill Sans, Tufte’s sans-serif font of choice.</p>
+      </section>
+
+    <section>
+      <h2 id="epigraphs">Epigraphs</h2>
+      <div class="epigraph">
+        <blockquote>
+          <p>The English language . . . becomes ugly and inaccurate because our thoughts are foolish, but the slovenliness of our language makes it easier for us to have foolish thoughts.</p>
+          <footer>George Orwell, “Politics and the English Language”</footer>
+        </blockquote>
+        <blockquote>
+          <p>For a successful technology, reality must take precedence over public relations, for Nature cannot be fooled.</p>
+          <footer>Richard P. Feynman, <cite>“What Do You Care What Other People Think?”</cite></footer>
+        </blockquote>
+        <blockquote>I do not paint things, I paint only the differences between things.<footer>Henri Matisse, <cite>Henri Matisse Dessins: thèmes et variations</cite> (Paris, 1943), 37</footer></blockquote>
+      </div>
+   </section>
+
+    <section>
+      <h2 id="sidenotes">Sidenotes: Footnotes and Marginal Notes</h2>
+      <p>One of the most distinctive features of Tufte’s style is his extensive use of sidenotes.<label for="sn-extensive-use-of-sidenotes" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-extensive-use-of-sidenotes" class="margin-toggle"/><span class="sidenote">This is a sidenote.</span> Sidenotes are like footnotes, except they don’t force the reader to jump their eye to the bottom of the page, but instead display off to the side in the margin. Perhaps you have noticed their use in this document already. You are very astute.</p>
+      <pre class="code">
+&lt;label for="sn-demo" class="margin-toggle sidenote-number"&gt;&lt;/label&gt;
+&lt;input type="checkbox" id="sn-demo" class="margin-toggle"/&gt;</pre>
+      <p>You must manually assign a reference <span class="code">id</span> to each side or margin note, replacing “sn-demo” in the <span class="code">for</span> and the <span class="code">id</span> attribute values with an appropriate descriptor. It is useful to use prefixes like <span class="code">sn-</span> for sidenotes and <span class="code">mn-</span> for margin notes.</p>
+      <p>Immediately adjacent to that sidenote reference in the main text goes the sidenote content itself, in a <span class="code">span</span> with class <span class="code">sidenote</span>. This tag is also inserted directly in the middle of the body text, but is either pushed into the margin or hidden by default. Make sure to position your sidenotes correctly by keeping the sidenote-number label close to the sidenote itself.</p>
+      <p>If you want a sidenote without footnote-style numberings, then you want a margin note.
+        <label for="mn-demo" class="margin-toggle">&#8853;</label>
+        <input type="checkbox" id="mn-demo" class="margin-toggle"/>
+        <span class="marginnote">
+          This is a margin note. Notice there isn’t a number preceding the note.
+        </span> On large screens, a margin note is just a sidenote that omits the reference number. This lessens the distracting effect taking away from the flow of the main text, but can increase the cognitive load of matching a margin note to its referent text. However, on small screens, a margin note is like a sidenote except its viewability-toggle is a symbol rather than a reference number. This document currently uses the symbol &#8853; (<span class="code">&amp;#8853;</span>), but it’s up to you.</p>
+      <pre class="code">
+&lt;label for="mn-demo" class="margin-toggle"&gt;&amp;#8853;&lt;/label&gt;
+&lt;input type="checkbox" id="mn-demo" class="margin-toggle"/&gt;
+&lt;span class="marginnote"&gt;
+  This is a margin note. Notice there isn’t a number preceding the note.
+&lt;/span&gt;</pre>
+      <p>Figures in the margin are created as margin notes, as demonstrated in the next section.</p>
+    </section>
+
+    <section>
+      <h2 id="figures">Figures</h2>
+      <p>Figures should try to use the <span class="code">figure</span> element, which by default are constrained to the main column. Don’t wrap figures in a paragraph tag. Any label or margin note goes in a regular margin note inside the figure. For example, most of the time one should introduce a figure directly into the main flow of discussion, like so:</p>
+      <figure>
+        <label for="mn-exports-imports" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-exports-imports" class="margin-toggle"/><span class="marginnote">From Edward Tufte, <em>Visual Display of Quantitative Information</em>, page 92.</span>
+        <img src="assets/css/img/exports-imports.png"/>
+      </figure>
+
+      <p><label for="mn-figure-1" class="margin-toggle">&#8853;</label><input type="checkbox" id="mn-figure-1" class="margin-toggle"/><span class="marginnote"><img src="assets/css/img/rhino.png" alt="Image of a Rhinoceros"/>F.J. Cole, “The History of Albrecht Dürer’s Rhinoceros in Zooological Literature,” <em>Science, Medicine, and History: Essays on the Evolution of Scientific Thought and Medical Practice</em> (London, 1953), ed. E. Ashworth Underwood, 337-356. From page 71 of Edward Tufte’s <em>Visual Explanations</em>.</span> But tight integration of graphics with text is central to Tufte’s work even when those graphics are ancillary to the main body of a text. In many of those cases, a margin figure may be most appropriate. To place figures in the margin, just wrap an image (or whatever) in a margin note inside a <span class="code">p</span> tag, as seen to the right of this paragraph.</p>
+      <p>If you need a full-width figure, give it the <span class="code">fullwidth</span> class. Make sure that’s inside an <span class="code">article</span>, and it will take up (almost) the full width of the screen. This approach is demonstrated below using Edward Tufte’s English translation of the Napoleon’s March data visualization. From <em>Beautiful Evidence</em>, page 122-124.</p>
+      <figure class="fullwidth">
+        <img src="assets/css/img/napoleons-march.png"/>
+      </figure>
+    </section>
+
+    <section>
+      <h2 id="code">Code</h2>
+      <p>Technical jargon, programming language terms, and code samples are denoted with the <span class="code">code</span> class, as I’ve been using in this document to denote HTML. </p>
+      <p>Extended code examples should use a <span class="code">pre</span> tag with class <span class="code">code</span>. This adds control over indentation and overflow as well:</p>
+      <pre class="code">
+      print "hello world"
+      </pre>
+    </section>
+    
+    <section id="c">
+      <h2>Tangle</h2>
+      <p id="calorieCalculator">
+      When you eat <span data-var="cookies" class="TKAdjustableNumber" data-min="1" data-max="30"> cookies</span>, you consume <b data-var="calories"> calories</b>. That's <span data-var="dailyPercent" data-format="%.0f">%</span> of your recommended daily calories.</p>
+    </section>
+    <section>
+      <h2 id="d3">d3</h2>
+    </section>
+
+  </article>
+</body>
+</html>
