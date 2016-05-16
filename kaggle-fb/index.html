@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Data Story Template</title>
+  <link rel="stylesheet" href="assets/css/tufte.css"/>
+  <link rel="stylesheet" href="assets/css/latex.css"/>
+  <link rel="stylesheet" href="assets/js/Tangle-0.1.0/TangleKit/TangleKit.css"/>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/Tangle.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/mootools.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/BVTouchable.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/sprintf.js"></script>
+  <script type="text/javascript" src="assets/js/Tangle-0.1.0/TangleKit/TangleKit.js"></script>
+  <!-- TODO check to see if v4 is out and upgrade -->
+  <script type="text/javascript" src="assets/js/d3/d3.v3.js"></script>
+  <script type="text/javascript" src="assets/js/lodash/4.1.1/lodash.min.js"></script>
+  <script type="text/javascript" src="assets/js/tangleCookie.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript">
+    // TODO move to tangleCookie.js
+    function init(){
+      console.log("loaded init");
+      /*
+      var tangle = new Tangle (document.getElementById("calorieCalculator"), {
+          initialize: function () {
+              this.cookies = 3;
+              this.caloriesPerCookie = 50;
+              this.dailyCalories = 2100;
+          },
+          update: function () {
+              this.calories = this.cookies * this.caloriesPerCookie;
+              this.dailyPercent = 100 * this.calories / this.dailyCalories;
+          }
+      });
+      */
+ 
+
+      d3.csv("assets/data/top_places.csv", function(data){
+          //console.log(data);
+          var plot = d3.select("#chart1").append("svg")
+              .attr("width", 400)
+              .attr("height", 400)
+              .append("g")
+              .attr("id", "main");
+
+          plot.selectAll("g")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("r", 2)
+            .attr("cx", function(d){
+              //console.log(d);
+              return d.x * 40;
+              })
+            .attr("cy", function(d){
+              return d.y * 40;
+              })
+            .style("opacity", 0.1)
+            .style("fill", function(d){
+              return ""+place_id;
+            });
+
+
+          });
+
+    }
+  
+  </script>
+</head>
+
+<body onload="init();">
+  <article>
+    <h1 id="tufte-css">Predicting Facebook Checkins </h1>
+    <p class="subtitle">Nathan Lubchenco</p>
+    <section>
+    <a href=https://www.kaggle.com/c/facebook-v-predicting-check-ins>Kaggle Facebook Checkins</a> 
+    <p><a href=https://www.kaggle.com/c/facebook-v-predicting-check-ins/forums/t/20928/platforms-of-a-railway-station>This thread</a> gave me the idea to treat check in places as polygons.  What follows is an exploration of what places look like when plotted both as polygons using all points ever used to checkin at a place and as polygons over time.
+    </section>
+
+    <section>
+      <h2 id="static_checkins">Static Checkins</h2>
+      <div id="chart1"></div>
+    </section>
+    <section>
+      <h2 id="dynamic_checkins">Dynamic Checkins</h2>
+    </section>
+
+      </article>
+</body>
+</html>
